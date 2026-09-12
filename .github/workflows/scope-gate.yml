@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Security-sensitive critical test
-        run: test -f critical/guard.txt
+        run: grep -qx VM6_SECURITY_GUARD_20260913 critical/guard.txt
 
   scope-gate:
     if: always()
@@ -42,4 +42,3 @@ jobs:
         run: |
           test "${{ needs.detect.result }}" = "success"
           test "${{ needs.critical.result }}" != "failure"
-
